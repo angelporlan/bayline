@@ -1,8 +1,6 @@
-const { app } = require("./_app.cjs");
+const { handler } = require("./_app.cjs");
 
-module.exports = async function handler(request) {
-  return app.fetch(request);
-};
+module.exports = handler;
 
 module.exports.config = {
   runtime: "nodejs",

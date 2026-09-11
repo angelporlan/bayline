@@ -1,7 +1,7 @@
 {
   "framework": "vite",
   "installCommand": "npm install",
-  "buildCommand": "npm run postinstall -w @bayline/api && npm run build -w @bayline/web && npx esbuild apps/api/src/app.ts --bundle --platform=node --format=cjs --outfile=api/_app.cjs --external:@prisma/client",
+  "buildCommand": "npm run postinstall -w @bayline/api && npm run build -w @bayline/web && npx esbuild apps/api/src/vercel-entry.ts --bundle --platform=node --format=cjs --outfile=api/_app.cjs --external:@prisma/client",
   "outputDirectory": "apps/web/dist",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
