@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum VehicleStatus {
+  IN_BUILD
+  BLOCKED
+  READY_FOR_TEST
+  IN_TEST
+  COMPLETE
+}
+
+enum PartStatus {
+  RECEIVED
+  INSPECTED
+  NDT_OK
+  INSTALLED
+  BLOCKED
+  SCRAPPED
+}
+
+enum NcrStatus {
+  OPEN
+  CONTAINED
+  CLOSED
+}
+
+enum EcoStatus {
+  OPEN
+  IMPLEMENTED
+  CLOSED
+}
+
+enum AuditAction {
+  PART_STATUS_CHANGED
+  PART_INSTALLED
+  PART_REMOVED
+  CERT_ATTACHED
+  NCR_OPENED
+  NCR_CLOSED
+  ECO_OPENED
+  ECO_CLOSED
+  READINESS_EVALUATED
+  READINESS_PASSED
+  READINESS_BLOCKED
+}
+
+model Vehicle {
+  id        String        @id @default(uuid())
+  code      String        @unique
+  name      String
+  program   String
+  status    VehicleStatus @default(IN_BUILD)
+  stages    Stage[]
+  ecos      Eco[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Stage {
+  id          String        @id @default(uuid())
+  vehicleId   String
+  vehicle     Vehicle       @relation(fields: [vehicleId], references: [id])
+  code        String
+  name        String
+  status      VehicleStatus @default(IN_BUILD)
+  positions   Position[]
+  ncrs        Ncr[]
+  auditEvents AuditEvent[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@unique([vehicleId, code])
+  @@index([vehicleId])
+}
+
+model Position {
+  id               String  @id @default(uuid())
+  stageId          String
+  stage            Stage   @relation(fields: [stageId], references: [id])
+  code             String
+  title            String
+  requiredPn       String
+  requiredRevision String
+  critical         Boolean @default(true)
+  installedPartId  String? @unique
+  installedPart    Part?   @relation(fields: [installedPartId], references: [id])
+
+  @@unique([stageId, code])
+  @@index([stageId])
+}
+
+model Part {
+  id           String        @id @default(uuid())
+  pn           String
+  serial       String        @unique
+  lot          String
+  revision     String
+  supplier     String
+  status       PartStatus    @default(RECEIVED)
+  certificates Certificate[]
+  ncrs         Ncr[]
+  events       AuditEvent[]
+  position     Position?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([pn])
+}
+
+model Certificate {
+  id        String   @id @default(uuid())
+  partId    String
+  part      Part     @relation(fields: [partId], references: [id])
+  type      String
+  title     String
+  issuedAt  DateTime
+  dummyUrl  String?
+  createdAt DateTime @default(now())
+
+  @@index([partId])
+}
+
+model Ncr {
+  id        String    @id @default(uuid())
+  stageId   String
+  stage     Stage     @relation(fields: [stageId], references: [id])
+  partId    String?
+  part      Part?     @relation(fields: [partId], references: [id])
+  code      String    @unique
+  title     String
+  detail    String
+  status    NcrStatus @default(OPEN)
+  openedAt  DateTime  @default(now())
+  closedAt  DateTime?
+
+  @@index([stageId])
+  @@index([partId])
+}
+
+model Eco {
+  id           String    @id @default(uuid())
+  vehicleId    String
+  vehicle      Vehicle   @relation(fields: [vehicleId], references: [id])
+  code         String    @unique
+  title        String
+  detail       String
+  affectsPn    String
+  newRevision  String
+  status       EcoStatus @default(OPEN)
+  openedAt     DateTime  @default(now())
+  closedAt     DateTime?
+
+  @@index([vehicleId])
+  @@index([affectsPn])
+}
+
+model AuditEvent {
+  id        String      @id @default(uuid())
+  stageId   String?
+  stage     Stage?      @relation(fields: [stageId], references: [id])
+  partId    String?
+  part      Part?       @relation(fields: [partId], references: [id])
+  actorRole String
+  actorName String
+  action    AuditAction
+  payload   Json
+  createdAt DateTime    @default(now())
+
+  @@index([stageId])
+  @@index([partId])
+  @@index([createdAt])
+}
