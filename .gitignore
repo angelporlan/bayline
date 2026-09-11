@@ -57,6 +57,7 @@ test-results/
 
 # Vercel / local deploy
 .vercel/
+api/_app.cjs
 
 # Misc
 *.local
@@ -68,3 +69,5 @@ temp/
 
 # Documentation
 docs/
+.vercel
+.env*
