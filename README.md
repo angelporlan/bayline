@@ -6,7 +6,12 @@ No es un centro de control de misión. No es un clon de PLM. No usa hardware, lo
 
 Es una herramienta interna de planta: árbol de ensamblaje, estados de pieza, no conformidades, cambios de ingeniería y una regla dura (en el servidor) que impide declarar una etapa `Ready for test` si falta evidencia.
 
-Todo el hardware, seriales y certificados de este repositorio son **DEMO / FICTIONAL**. Banner: `DATOS DE DEMOSTRACIÓN — HARDWARE FICTICIO`.
+Todo el hardware, seriales y certificados de este repositorio son **DEMO / FICTIONAL**. Banner: `FICTIONAL DEMO DATA`.
+
+Demo pública: https://bayline-zeta.vercel.app  
+Código: https://github.com/angelporlan/bayline
+
+`POST /api/demo/reset` restaura el seed (header `X-Demo-Reset-Token`; el valor vive en Vercel / `.env`, no en el repo).
 
 ## Arranque local
 

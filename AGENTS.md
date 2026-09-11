@@ -60,12 +60,12 @@ Cada fase debe dejar:
 
 MVP hecho cuando:
 
-- [ ] Seed crea 2 vehículos, 2 etapas, ~12 piezas, 1 NCR abierto, 1 ECO abierto, 1 certificado faltante
-- [ ] Una etapa **no** puede pasar a `READY_FOR_TEST`
-- [ ] Tras cerrar NCR, aplicar ECO y adjuntar certificado, **sí** puede
-- [ ] Cada transición escribe `AuditEvent`
-- [ ] Demo desplegada con banner `FICTIONAL DEMO DATA`
-- [ ] README del repo explica en 8 líneas qué es y qué no es
+- [x] Seed crea 2 vehículos, 2 etapas, ~12 piezas, 1 NCR abierto, 1 ECO abierto, 1 certificado faltante
+- [x] Una etapa **no** puede pasar a `READY_FOR_TEST`
+- [x] Tras cerrar NCR, aplicar ECO y adjuntar certificado, **sí** puede
+- [x] Cada transición escribe `AuditEvent`
+- [x] Demo desplegada con banner `FICTIONAL DEMO DATA`
+- [x] README del repo explica en 8 líneas qué es y qué no es
 
 ## Estilo de código
 
