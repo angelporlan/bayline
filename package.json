@@ -1,0 +1,27 @@
+{
+  "name": "bayline",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Bayline — as-built + test readiness demo for a fictional launcher",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm run dev -w @bayline/api",
+    "dev:web": "npm run dev -w @bayline/web",
+    "build": "npm run build -w @bayline/api && npm run build -w @bayline/web",
+    "test": "npm run test -w @bayline/api",
+    "db:migrate": "npm run db:migrate -w @bayline/api",
+    "db:push": "npm run db:push -w @bayline/api",
+    "db:seed": "npm run db:seed -w @bayline/api",
+    "db:studio": "npm run db:studio -w @bayline/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
