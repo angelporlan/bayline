@@ -1,0 +1,70 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Env and secrets — never commit
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.p12
+*.key
+credentials.json
+service-account*.json
+
+# Build / output
+dist/
+build/
+.turbo/
+.cache/
+.vite/
+.next/
+out/
+coverage/
+.nyc_output/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# Logs
+logs/
+*.log
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# Vercel / local deploy
+.vercel/
+
+# Misc
+*.local
+tmp/
+temp/
+.cursor/
+.agent/
+.grok/
+
+# Documentation
+docs/
