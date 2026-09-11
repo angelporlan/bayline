@@ -8,6 +8,7 @@ import { partRoutes } from "./routes/parts";
 import { positionRoutes } from "./routes/positions";
 import { ncrRoutes } from "./routes/ncrs";
 import { ecoRoutes } from "./routes/ecos";
+import { demoRoutes } from "./routes/demo";
 
 export type AppVars = {
   role: DemoRole;
@@ -32,6 +33,7 @@ api.route("/", partRoutes);
 api.route("/", positionRoutes);
 api.route("/", ncrRoutes);
 api.route("/", ecoRoutes);
+api.route("/", demoRoutes);
 
 app.route("/api", api);
 

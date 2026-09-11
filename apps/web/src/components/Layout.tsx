@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Banner } from "./Banner";
+import { ResetDemo } from "./ResetDemo";
 import { RoleSwitch } from "./RoleSwitch";
 
 export function Layout() {
@@ -20,7 +21,8 @@ export function Layout() {
             Vehículos
           </NavLink>
         </nav>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-4">
+          <ResetDemo />
           <RoleSwitch />
         </div>
       </header>

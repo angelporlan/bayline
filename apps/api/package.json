@@ -20,11 +20,11 @@
     "@prisma/client": "^6.16.1",
     "dotenv": "^17.2.2",
     "hono": "^4.9.8",
+    "prisma": "^6.16.1",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
-    "prisma": "^6.16.1",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
